@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dietary constraints vocabulary</title>
+    <link rel="stylesheet" type="text/css" href="https://apps.rhiaro.co.uk/css/normalize.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://apps.rhiaro.co.uk/css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="alternate" type="text/turtle" href="http://rdf-translator.appspot.com/convert/rdfa/turtle/https://apps.rhiaro.co.uk/foodulator/terms" />
+    <link rel="alternate" type="application/ld+json" href="http://rdf-translator.appspot.com/convert/rdfa/json-ld/https://apps.rhiaro.co.uk/foodulator/terms" />
+    <style type="text/css">
+      pre { font-size: 0.8em; }
+    </style>
+  </head>
+  <body about="" prefix="schema: https://schema.org/ dbpedia: http://dbpedia.org/resource/" typeof="owl:Ontology">
+    <main class="w2of3 center">
+    <h1 about="" typeof="owl:Ontology" property="dc:title">Dietary Constraints</h1>
+    <p>By <a href="http://rhiaro.co.uk/#i" rel="dc:creator">Amy Guy</a>; published: <time rel="dc:published" datetime="2016-02-06" datatype="xsd:dateTime">6th February 2016</time>; last modified: <time rel="dc:modified" datetime="2016-02-06" datatype="xsd:dateTime">6th February 2016</time></p>
+    <section id="toc">
+      <h2>Table of contents</h2>
+      <div>
+        <ol>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#discussion">Discussion</a></li>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#instances">Instances</a></li>
+          <li><a href="#useage">Useage</a></li>
+        </ol>
+      </div>
+    </section>
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <div>
+        <p property="dc:description">This vocabulary describes common dietary constraints, and terms to express them with regards to a <em>person</em>. There are other vocabularies for linking recipes, dishes or restaurants to suitability for particular diets.</p>
+      </div>
+    </section>
+    <section id="discussion">
+      <h2>Discussion</h2>
+      <div>
+        <p>Notes about things considered when creating this vocabulary.</p>
+        <ul>
+          <li>Diets are of type <code>schema:RestrictedDiet</code> even though this is an enumerated list of a fixed set of values, because that constraint is dumb.</li>
+          <li>No domain or range on the properties, because whilst they're intended for some kind of person, I'm not interested in dicating what RDF type that person is. Simiarly I'd like people to publish their own dietary constraints at URIs and use this as objects where necessary. Also I'm happy for the object to be a literal where someone is too lazy to publish a constraint with a URI (eg. very specific/niche things like "No cooked tomatoes"; really I know someone allergic to cooked tomatoes but not raw ones).</li>
+          <li>Some diets make sense in both 'no' and 'low' form, and some only really make sense as one or the other (to me) but they all have both options, because who am I to decide which make sense. Except 'calorie'. There's no such thing as a no-calorie diet, right?</li>
+          <li>Definitions of 'low' vary between regions/cultures/regulatory bodies. Use context to determine..</li>
+          <li>I considered creating classes for 'requirement', 'strong preference' etc, and reifying dietary constraints, but decided creating properties was ultimately less work for me right now, and for publishing this data. If one day I need to add extra properties to a dietary constraint (ie. 'I was vegan between these dates') then I might rethink this model, but I'm not going to overengineer in advance.</li>
+        </ul>
+        <p>If I've missed something PR/issue welcome on <a href="https://github.com/rhiaro/foodulator">github</a>.</p>
+      </div>
+    </section>
+    <h2>Properties</h2>
+    <dl>
+      <dt id="dietaryConstraint" about="#dietaryConstraint" typeof="rdf:Property" property="rdfs:label"><a href="#dietaryConstraint">Dietary constraint</a></dt>
+      <dd about="#dietaryConstraint">
+        <p property="rdfs:comment">A constraint (restriciton or preference) of a person for a particular diet.</p>
+      </dd>
+      <dt id="dietaryConstraintCritical" about="#dietaryConstraintCritical" typeof="rdf:Property" property="rdfs:label"><a href="#dietaryConstraintCritical">Critical dietary requirement</a></dt>
+      <dd about="#dietaryConstraintCritical">
+        <p property="rdfs:comment">A requirement of a person for a particular diet, with no risk of cross-contamination (possibly for medical reasons).</p>
+        <p>subProperty of: <a rel="rdfs:subPropertyOf" href="#dietaryConstraint">dietary constraint</a></p>
+      </dd>
+      <dt id="dietaryConstraintRequired" about="#dietaryConstraintRequired" typeof="rdf:Property" property="rdfs:label"><a href="#dietaryConstraintRequired">Dietary requirement</a></dt>
+      <dd about="#dietaryConstraintRequired">
+        <p property="rdfs:comment">A requirement of a person for a particular diet, with no likelihood of compromise.</p>
+        <p>subProperty of: <a rel="rdfs:subPropertyOf" href="#dietaryConstraint">dietary constraint</a></p>
+      </dd>
+      <dt id="dietaryConstraintStrong" about="#dietaryConstraintStrong" typeof="rdf:Property" property="rdfs:label"><a href="#dietaryConstraintStrong">Strong dietary preference</a></dt>
+      <dd about="#dietaryConstraintStrong">
+        <p property="rdfs:comment">A strong preference of a person for a particular diet; compromise or blissful ignorance may be permissable in some circumstances.</p>
+        <p>subProperty of: <a rel="rdfs:subPropertyOf" href="#dietaryConstraint">dietary constraint</a></p>
+      </dd>
+      <dt id="dietaryConstraintWeak" about="#dietaryConstraintWeak" typeof="rdf:Property" property="rdfs:label"><a href="#dietaryConstraintWeak">Weak dietary preference</a></dt>
+      <dd about="#dietaryConstraintWeak">
+        <p property="rdfs:comment">Some preference of a person for a particular diet, but can be flexible or probably won't go out of their way to achieve this.</p>
+        <p>subProperty of: <a rel="rdfs:subPropertyOf" href="#dietaryConstraint">dietary constraint</a></p>
+      </dd>
+    </dl>
+    
+    <h2>Instances</h2>
+    <dl>
+      <dt id="None" about="#None" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#None">None</a></dt>
+      <dd about="#None">
+        <p property="rdfs:comment">No dietary constraints</p>
+      </dd>
+      <dt id="Pescetarian" about="#Pescetarian" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Pescetarian">Pescetarian</a></dt>
+      <dd about="#Pescetarian">
+        <p property="rdfs:comment">Does not eat meat, but eats fish/seafood.</p>
+      </dd>
+      <dt id="Lactovegetarian" about="#Lactovegetarian" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Lactovegetarian">Lacto-vegetarian</a></dt>
+      <dd about="#Lactovegetarian">
+        <p property="rdfs:comment">Vegetarian, eats dairy but no eggs.</p>
+      </dd>
+      <dt id="Ovovegetarian" about="#Ovovegetarian" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Ovovegetarian">Ovo-vegetarian</a></dt>
+      <dd about="#Ovovegetarian">
+        <p property="rdfs:comment">Vegetarian, eats eggs but no dairy.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/VegetarianDiet">schema:VegetarianDiet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Vegetarianism">dbpedia:Vegetarianism</a></p>
+      </dd>
+      <dt id="Vegan" about="#Vegan" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Vegan">Vegan</a></dt>
+      <dd about="#Vegan">
+        <p property="rdfs:comment">Vegan; no animal products including eggs, dairy and honey.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/VeganDiet">schema:VeganDiet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Veganism">dbpedia:Veganism</a></p>
+      </dd>
+      <dt id="Halal" about="#Halal" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Halal">Halal</a></dt>
+      <dd about="#Halal">
+        <p property="rdfs:comment">A diet conforming to Islamic dietary practices.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/Diet">schema:HalalDiet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Halal">dbpedia:Halal</a></p>
+      </dd>
+      <dt id="Kosher" about="#Kosher" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Kosher">Kosher</a></dt>
+      <dd about="#Kosher">
+        <p property="rdfs:comment">A diet conforming to Jewish dietary practices.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/KosherDiet">schema:KosherDiet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Kashrut">dbpedia:Kashrut</a></p>
+      </dd>
+      <dt id="Fruitarian" about="#Fruitarian" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Fruitarian">Fruitarian</a></dt>
+      <dd about="#Fruitarian">
+        <p property="rdfs:comment">A diet that includes fruits, vegetables, nuts, and seeds, without animal products or grains.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Fruitarianism">dbpedia:Fruitarianism</a></p>
+      </dd>
+      <dt id="Raw" about="#Raw" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Raw">Raw</a></dt>
+      <dd about="#Raw">
+        <p property="rdfs:comment">Uncooked, unprocessed or simply processed foods.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Raw_foodism">dbpedia:Raw_foodism</a></p>
+      </dd>
+      <dt id="Macrobiotic" about="#Macrobiotic" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#">Macrobiotic</a></dt>
+      <dd about="#Macrobiotic">
+        <p property="rdfs:comment">A dietary regimen which involves eating grains as a staple food, supplemented with other foods such as local vegetables, and avoiding the use of highly processed or refined foods and most animal products.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Macrobiotic_diet">dbpedia:Macrobiotic_diet</a></p>
+      </dd>
+      <dt id="Organic" about="#Organic" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#Organic">Organic</a></dt>
+      <dd about="#Organic">
+        <p property="rdfs:comment">Foods produced by organic farming. While the standards differ worldwide synthetic pesticides and chemical fertilizers are not allowed.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/Organic_food">dbpedia:Organic_food</a></p>
+      </dd>
+      <dt id="GlutenNo" about="#GlutenNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#GlutenNo">No Gluten</a></dt>
+      <dd about="#GlutenNo">
+        <p property="rdfs:comment">A gluten-free diet.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/GlutenFreeDiet">schema:GlutenFreeDiet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/">dbpedia:</a></p>
+      </dd>
+      <dt id="GlutenLow" about="#GlutenLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#GlutenLow">Low Gluten</a></dt>
+      <dd about="#GlutenLow">
+        <p property="rdfs:comment">A diet in which gluten intake is minimised.</p>
+      </dd>
+      <dt id="DairyNo" about="#DairyNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#DairyNo">No Dairy</a></dt>
+      <dd about="#DairyNo">
+        <p property="rdfs:comment">A dairy-free diet.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/Diet">schema:Diet</a>, <a rel="rdfs:seeAlso" href="http://dbpedia.org/resource/">dbpedia:</a></p>
+      </dd>
+      <dt id="DairyLow" about="#DairyLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#DairyLow">Low Dairy</a></dt>
+      <dd about="#DairyLow">
+        <p property="rdfs:comment">A diet in which diary consumption is minimised.</p>
+      </dd>
+      <dt id="EggsNo" about="#EggsNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#EggsNo">No Eggs</a></dt>
+      <dd about="#EggsNo">
+        <p property="rdfs:comment">An egg-free diet.</p>
+      </dd>
+      <dt id="EggsLow" about="#EggsLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#EggsLow">Low Eggs</a></dt>
+      <dd about="#EggsLow">
+        <p property="rdfs:comment">A diet in which egg consumption is minimised.</p>
+      </dd>
+      <dt id="SugarNo" about="#SugarNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SugarNo">No Sugar</a></dt>
+      <dd about="#SugarNo">
+        <p property="rdfs:comment">A sugar-free diet.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/DiabeticDiet">schema:DiabeticDiet</a></p>
+      </dd>
+      <dt id="SugarLow" about="#SugarLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SugarLow">Low Sugar</a></dt>
+      <dd about="#SugarLow">
+        <p property="rdfs:comment">A diet in which sugar intake is minimised.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/DiabeticDiet">schema:DiabeticDiet</a></p>
+      </dd>
+      <dt id="NutsNo" about="#NutsNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#NutsNo">No Nuts</a></dt>
+      <dd about="#NutsNo">
+        <p property="rdfs:comment">A nut-free diet.</p>
+      </dd>
+      <dt id="NutsLow" about="#NutsLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#NutsLow">Low Nuts</a></dt>
+      <dd about="#NutsLow">
+        <p property="rdfs:comment">A diet in which intake of nuts is minimised.</p>
+      </dd>
+      <dt id="ShellfishNo" about="#ShellfishNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#ShellfishNo">No Shellfish</a></dt>
+      <dd about="#ShellfishNo">
+        <p property="rdfs:comment">A shellfish-free diet.</p>
+      </dd>
+      <dt id="ShellfishLow" about="#ShellfishLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#ShellfishLow">Low Shellfish</a></dt>
+      <dd about="#ShellfishLow">
+        <p property="rdfs:comment">A diet in which shellfish intake is minimised.</p>
+      </dd>
+      <dt id="AlcoholNo" about="#AlcoholNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#AlcoholNo">No Alcohol</a></dt>
+      <dd about="#AlcoholNo">
+        <p property="rdfs:comment">An alcohol-free diet.</p>
+      </dd>
+      <dt id="AlcoholLow" about="#AlcoholLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#AlcoholLow">Low Alcohol</a></dt>
+      <dd about="#AlcoholLow">
+        <p property="rdfs:comment">A diet in which alcohol intake is minimised.</p>
+      </dd>
+      <dt id="CaffeineNo" about="#CaffeineNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#CaffeineNo">No Caffeine</a></dt>
+      <dd about="#CaffeineNo">
+        <p property="rdfs:comment">A caffeine-free diet.</p>
+      </dd>
+      <dt id="CaffeineLow" about="#CaffeineLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#CaffeineLow">Low Caffeine</a></dt>
+      <dd about="#CaffeineLow">
+        <p property="rdfs:comment">A diet in which caffeine intake is minimised.</p>
+      </dd>
+      <dt id="SoyNo" about="#SoyNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SoyNo">No Soy</a></dt>
+      <dd about="#SoyNo">
+        <p property="rdfs:comment">A soy-free diet.</p>
+      </dd>
+      <dt id="SoyLow" about="#SoyLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SoyLow">Low Soy</a></dt>
+      <dd about="#SoyLow">
+        <p property="rdfs:comment">A diet in which soy intake is minimised.</p>
+      </dd>
+      <dt id="CarbsNo" about="#CarbsNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#CarbsNo">No Carbs</a></dt>
+      <dd about="#CarbsNo">
+        <p property="rdfs:comment">A carbohydrate-free diet.</p>
+      </dd>
+      <dt id="CarbsLow" about="#CarbsLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#CarbsLow">Low Carbs</a></dt>
+      <dd about="#CarbsLow">
+        <p property="rdfs:comment">A diet in which carbohydrate intake is minimised.</p>
+      </dd>
+      <dt id="SaltNo" about="#SaltNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SaltNo">No Salt</a></dt>
+      <dd about="#SaltNo">
+        <p property="rdfs:comment">A salt-free/sodium-free diet.</p>
+      </dd>
+      <dt id="SaltLow" about="#SaltLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#SaltLow">Low Salt</a></dt>
+      <dd about="#SaltLow">
+        <p property="rdfs:comment">A diet in which salt / sodium intake is minimised.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/LowSaltDiet">schema:LowSaltDiet</a></p>
+      </dd>
+      <dt id="FatNo" about="#FatNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#FatNo">No Fat</a></dt>
+      <dd about="#FatNo">
+        <p property="rdfs:comment">A fat-free diet.</p>
+      </dd>
+      <dt id="FatLow" about="#FatLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#FatLow">Low Fat</a></dt>
+      <dd about="#FatLow">
+        <p property="rdfs:comment">A diet in which fat intake is minimised.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/LowFatDiet">schema:LowFatDiet</a></p>
+      </dd>
+      <dt id="LactoseNo" about="#LactoseNo" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#LactoseNo">No Lactose</a></dt>
+      <dd about="#LactoseNo">
+        <p property="rdfs:comment">A lactose-free diet.</p>
+      </dd>
+      <dt id="LactoseLow" about="#LactoseLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#LactoseLow">Low Lactose</a></dt>
+      <dd about="#LactoseLow">
+        <p property="rdfs:comment">A diet in which lactose intake is minimised.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/LowLactoseDiet">schema:LowLactoseDiet</a></p>
+      </dd>
+      <dt id="CalorieLow" about="#CalorieLow" typeof="schema:RestrictedDiet" property="rdfs:label"><a href="#CalorieLow">Low Calorie</a></dt>
+      <dd about="#CalorieLow">
+        <p property="rdfs:comment">A diet in which calorie intake is minimised.</p>
+        <p>See also: <a rel="rdfs:seeAlso" href="https://schema.org/LowCalorieDiet">schema:LowCalorieDiet</a></p>
+      </dd>
+    </dl>
+    <section id="useage">
+      <h2>Usage</h2>
+      <div>
+        <p>This vocabulary is used by (and was initially developed for) <a href="https://apps.rhiaro.co.uk/foodulator">Foodulator</a>, for storing your dietary constraints so that other apps can read them from your profile. Example:</p>
+        <pre>
+@prefix diet: &lt;https://apps.rhiaro.co.uk/foodulator/terms#&gt;
+&lt;http://rhiaro.co.uk/about#me&gt;
+                               diet:dietaryConstraintCritical diet:Ovovegetarian, diet:Lactovegetarian ;
+                               diet:dietaryConstraintRequired diet:Vegan ;
+                               diet:dietaryConstraintRequired diet:AlcoholNo ;
+                               diet:dietaryConstraintStrong "No walnuts" ;
+                               diet:dietaryConstraintStrong "No raw onion" ;
+                               diet:dietaryConstraintStrong "No pineapple" ;
+                               diet:dietaryConstraintWeak diet:SugarLow ;
+                               diet:dietaryConstraintWeak diet:Raw ;
+                               diet:dietaryConstraintWeak diet:SaltLow ;
+                               diet:dietaryConstraintWeak diet:Organic .
+        </pre>
+        <p>If you start using it for something or publishing your dietary constraints somewhere using this, let me know or PR to add yours here.</p>
+      </div>
+    </section>
+  </main>
+  </body>
+</html>

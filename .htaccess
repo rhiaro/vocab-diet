@@ -1,0 +1,12 @@
+RewriteEngine on
+RewriteBase /diet/
+
+RewriteCond %{HTTP_ACCEPT} ^.*text/turtle.* [OR]
+RewriteCond %{HTTP_ACCEPT} ^.*application/turtle.*
+RewriteRule ^*.$ http://rdf-translator.appspot.com/convert/rdfa/turtle/http://vocab.amy.gy/diet [L]
+
+RewriteCond %{HTTP_ACCEPT} ^.*application/ld\+json.* [OR]
+RewriteCond %{HTTP_ACCEPT} ^.*application/json.*
+RewriteRule ^*.$ http://rdf-translator.appspot.com/convert/rdfa/json-ld/http://vocab.amy.gy/diet [L]
+
+RewriteRule ^(/)?$ index.html [L]
