@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="https://apps.rhiaro.co.uk/css/normalize.min.css" />
     <link rel="stylesheet" type="text/css" href="https://apps.rhiaro.co.uk/css/main.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="alternate" type="text/turtle" href="http://rdf-translator.appspot.com/convert/rdfa/turtle/https://apps.rhiaro.co.uk/foodulator/terms" />
-    <link rel="alternate" type="application/ld+json" href="http://rdf-translator.appspot.com/convert/rdfa/json-ld/https://apps.rhiaro.co.uk/foodulator/terms" />
+    <link rel="alternate" type="text/turtle" href="http://rdf-translator.appspot.com/convert/rdfa/turtle/http://vocab.amy.gy/diet" />
+    <link rel="alternate" type="application/ld+json" href="http://rdf-translator.appspot.com/convert/rdfa/json-ld/http://vocab.amy.gy/diet" />
     <style type="text/css">
       pre { font-size: 0.8em; }
     </style>
@@ -251,7 +251,7 @@
       <div>
         <p>This vocabulary is used by (and was initially developed for) <a href="https://apps.rhiaro.co.uk/foodulator">Foodulator</a>, for storing your dietary constraints so that other apps can read them from your profile. Example:</p>
         <pre>
-@prefix diet: &lt;https://apps.rhiaro.co.uk/foodulator/terms#&gt;
+@prefix diet: &lt;http://vocab.amy.gy/diet#&gt;
 &lt;http://rhiaro.co.uk/about#me&gt;
                                diet:dietaryConstraintCritical diet:Ovovegetarian, diet:Lactovegetarian ;
                                diet:dietaryConstraintRequired diet:Vegan ;
